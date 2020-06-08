@@ -8,13 +8,14 @@ module.exports =  function (app) {
         password: { type: String,required: true },
         email: { type: String,required: true },
         age:{type:Number,required:true,min:6,max:500},
-        phone: {type: String, required: [true, 'User phone number required']
+        phone: {type: String, unique:true,required: [true, 'User phone number required']
         },
         date:{type:Date,default:Date.now()}
-    })
-    UserSchema.methods.findUserByPhone=function (phone) {
-        console.log('我是一个实例方法')
-        console.log(this)
+    });
+    UserSchema.statics={
+        findUserByPhone: function(phone) {
+            return this.find({phone: phone})
+        }
     }
     return mongoose.model('User', UserSchema,'user')
-}
+};

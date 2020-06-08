@@ -17,7 +17,6 @@ class UserController extends BaseController {
     async save(user) {
         const {ctx} = this;
         const result = await ctx.service.userService.save();
-        console.log(result)
         this.successDataAndMsg(result, "保存成功")
     }
 }
